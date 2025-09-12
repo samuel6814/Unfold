@@ -2,13 +2,13 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[cite_start]unfold is a web application designed to be an engaging, supportive, and practical companion for individuals on their recovery journey. [cite: 9, 10] [cite_start]It provides a safe, non-judgmental space with a suite of tools to build self-awareness and foster connection. [cite: 19, 54]
+unfold is a web application designed to be an engaging, supportive, and practical companion for individuals on their recovery journey. It provides a safe, non-judgmental space with a suite of tools to build self-awareness and foster connection.
 
 **Live Demo:** [Link to your deployed application](https://your-live-demo-link.com)
 
 ## 📸 Screenshot
 
-*Replace this image with a current screenshot of your application's hero section.*
+
 
 ![unfold hero section](https://i.imgur.com/uG9t6fr.png)
 
@@ -18,18 +18,18 @@
 
 The application is built around several key features designed to provide holistic support:
 
-* [cite_start]**🤖 AI Counselor:** A sophisticated and empathetic AI chatbot available 24/7 for conversational support. [cite: 14, 18, 19] [cite_start]It's trained in therapeutic techniques to help users process thoughts and challenges in a secure space. [cite: 18]
+* **🤖 AI Counselor:** A sophisticated and empathetic AI chatbot available 24/7 for conversational support. It's trained in therapeutic techniques to help users process thoughts and challenges in a secure space.
 * **🛠️ Core Recovery Toolkit:** A set of foundational, interactive tools for daily engagement, including:
-    * [cite_start]Daily Check-in & Mood Tracker [cite: 41]
-    * [cite_start]Guided Journaling with Prompts [cite: 45]
-    * [cite_start]Habit & Sobriety Tracker [cite: 50]
+    * Daily Check-in & Mood Tracker
+    * Guided Journaling with Prompts
+    * Habit & Sobriety Tracker
 * **🤝 Support & Connection:** Features to combat the isolation of recovery, such as:
-    * [cite_start]An Anonymous Community Hub for sharing stories and support. [cite: 57, 58]
-    * [cite_start]An optional Milestone Sharing Circle for community encouragement. [cite: 60, 61]
+    * An Anonymous Community Hub for sharing stories and support.
+    * An optional Milestone Sharing Circle for community encouragement.
 * **📚 Resources & Skill-Building:** A collection of tools to empower users with knowledge and practical skills, including:
-    * [cite_start]An "SOS" Grounding Toolkit for moments of crisis. [cite: 67]
-    * [cite_start]A Curated Resource Library with expert-backed articles and videos. [cite: 70]
-    * [cite_start]A Personal Goal Setting section to define and reinforce the "why" of recovery. [cite: 73]
+    * An "SOS" Grounding Toolkit for moments of crisis.
+    * A Curated Resource Library with expert-backed articles and videos.
+    * A Personal Goal Setting section to define and reinforce the "why" of recovery.
 
 ***
 
@@ -37,11 +37,11 @@ The application is built around several key features designed to provide holisti
 
 This project is built using a modern and efficient technology stack:
 
-* [cite_start]**Frontend:** **React** (with **Vite**) [cite: 1]
-* [cite_start]**Styling:** **Styled Components** [cite: 1]
-* [cite_start]**Routing:** **React Router** [cite: 1]
-* [cite_start]**Icons:** **Lucide React** [cite: 1]
-* [cite_start]**Backend & DB:** **Firebase** (Firestore and Google Authentication) [cite: 2]
+* **Frontend:** **React** (with **Vite**)
+* **Styling:** **Styled Components**
+* **Routing:** **React Router**
+* **Icons:** **Lucide React**
+* **Backend & DB:** **Firebase** (Firestore and Google Authentication)
 
 ***
 
