@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer"
+import Gateway from "./components/CoreRecovery/Gateway";
+import Gateway2 from "./components/AiCounsellor/Gateway";
+import Gateway3 from "./components/Community/Gateway";
+import Gateway4 from "./components/RescourceSkills/Gateway";
 
 
 const Container = styled.div`
@@ -24,12 +28,30 @@ const App = () => {
       <Section id="home">
         <Hero />
       </Section>
+
+      <Section>
+        <Gateway />
+      </Section>
+
+      <Section>
+        <Gateway2 />
+      </Section>
+
+      <Section>
+        <Gateway3/>
+      </Section>
+
+      <Section>
+        <Gateway4 />
+      </Section>
      
 
 
       <Section id="footer">
         <Footer />
       </Section>  
+
+      
  
 
     </Container>

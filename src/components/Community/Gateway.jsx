@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
-import { Bot } from 'lucide-react';
+import { HeartHandshake } from 'lucide-react';
 
 const fadeInUp = keyframes`
   from {
@@ -19,7 +19,8 @@ const PageContainer = styled.div`
   min-height: 100vh;
   width: 100%;
   background: #ffe0f0;
-  background: linear-gradient(5deg, rgba(255, 224, 240, 1) 0%, rgba(200, 215, 230, 1) 100%);
+  /* MODIFIED: Gradient flipped to have pink at the top, blue at the bottom */
+  background: linear-gradient(5deg, rgba(200, 215, 230, 1) 0%, rgba(255, 224, 240, 1) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +68,7 @@ const Description = styled.p`
   margin-bottom: 2.5rem;
 `;
 
-const StartButton = styled(Link)`
+const EnterButton = styled(Link)`
   display: inline-block;
   padding: 1rem 3rem;
   border-radius: 10px;
@@ -93,13 +94,13 @@ const Gateway = () => {
       <PageContainer>
         <GatewayCard>
           <IconWrapper>
-            <Bot size={40} color="#333" />
+            <HeartHandshake size={40} color="#333" />
           </IconWrapper>
-          <Title>Your AI Companion</Title>
+          <Title>Community Hub</Title>
           <Description>
-            You're about to enter a safe, non-judgmental space to talk, reflect, and understand your feelings. Your AI companion is here to listen and support you, anytime you need.
+            This is a safe and anonymous space to share your story and connect with others on a similar journey. Give and receive support, and remember you are not alone.
           </Description>
-          <StartButton to="/chat">Begin Conversation</StartButton>
+          <EnterButton to="/communityhub">Enter the Hub</EnterButton>
         </GatewayCard>
       </PageContainer>
     </>
@@ -107,3 +108,4 @@ const Gateway = () => {
 };
 
 export default Gateway;
+

@@ -38,19 +38,34 @@ const HeroSection = styled.section`
   overflow: hidden;
 `;
 
-// Container for the main content
+// MODIFIED: Added column direction and gap for mobile
 const HeroContent = styled.main`
   flex-grow: 1;
   display: flex;
+  flex-direction: column; /* Stack vertically on mobile */
   align-items: center;
-  justify-content: space-between;
-  padding: 0 8rem;
-  position: relative;
+  justify-content: center;
+  gap: 2rem; /* Add space between text and image on mobile */
+  width: 100%;
+  padding: 80px clamp(1.5rem, 5vw, 8rem);
+  box-sizing: border-box;
+
+  /* On larger screens, switch to a two-column layout */
+  @media (min-width: 992px) {
+    flex-direction: row; /* Side-by-side on desktop */
+    justify-content: space-between;
+  }
 `;
 
+// MODIFIED: Text alignment and max-width adjustments for responsiveness
 const LeftColumn = styled.div`
-  max-width: 500px;
+  max-width: 550px;
   z-index: 2;
+  text-align: center;
+
+  @media (min-width: 992px) {
+    text-align: left;
+  }
 `;
 
 const SmallHeading = styled.p`
@@ -59,8 +74,9 @@ const SmallHeading = styled.p`
   margin-bottom: 1rem;
 `;
 
+// MODIFIED: Responsive font size
 const MainHeadline = styled.h1`
-  font-size: 4.5rem;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 800;
   color: #1a1a1a;
   line-height: 1.1;
@@ -80,35 +96,44 @@ const Description = styled.p`
   color: #555;
   line-height: 1.6;
   max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 992px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
+// MODIFIED: Now visible on mobile
 const RightColumn = styled.div`
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 60%;
   display: flex;
-  justify-content: flex-end;
+  flex: 1;
+  justify-content: center;
   align-items: center;
-  padding-right: 8rem;
+  max-width: 500px;
+  width: 100%;
 `;
 
+// MODIFIED: Made the image responsive
 const PaperGraphic = styled.img`
-  width: 500px;
+  width: 100%;
+  max-width: 300px; /* Smaller max-width for mobile */
   height: auto;
-  position: relative;
-  left: -100px;
   z-index: 1;
   opacity: 1;
   filter: brightness(1.1) contrast(1) saturate(1);
   animation: ${slowRotate} 60s linear infinite;
+
+  @media (min-width: 992px) {
+    max-width: 500px; /* Restore larger size for desktop */
+  }
 `;
 
-// REMOVED StatsContainer, StatsNumber, and StatsLabel styled components
-
 const Hero = () => {
-  const headlineText = "YOU ARE NOT ALONE ";
+  // MODIFIED: Split headline into two lines
+  const headlineText = "YOU ARE NOT\nALONE";
+  const headlineLines = headlineText.split('\n');
   
   return (
     <HeroSection>
@@ -117,14 +142,25 @@ const Hero = () => {
         <LeftColumn>
           <SmallHeading>Unfold: Rediscover yourself. Reclaim your story.</SmallHeading>
           <MainHeadline>
-            {headlineText.split('').map((letter, index) => (
-              <AnimatedLetter
-                key={index}
-                style={{ '--delay': `${index * 0.04}s` }}
-              >
-                {letter === ' ' ? '\u00A0' : letter}
-              </AnimatedLetter>
-            ))}
+            {/* MODIFIED: Re-introduced logic for multi-line animation */}
+            {headlineLines.map((line, lineIndex) => {
+              const previousLinesLength = headlineLines.slice(0, lineIndex).reduce((acc, l) => acc + l.length, 0);
+              return (
+                <div key={lineIndex}>
+                  {line.split('').map((letter, letterIndex) => {
+                    const globalIndex = previousLinesLength + letterIndex;
+                    return (
+                      <AnimatedLetter
+                        key={letterIndex}
+                        style={{ '--delay': `${globalIndex * 0.04}s` }}
+                      >
+                        {letter === ' ' ? '\u00A0' : letter}
+                      </AnimatedLetter>
+                    );
+                  })}
+                </div>
+              );
+            })}
           </MainHeadline>
           <Description>
           You deserve a safe space to heal. A place where you don't have to pretend, where your feelings are valid, and your voice is the most important one in the room. We're here to listen.
@@ -133,10 +169,10 @@ const Hero = () => {
         <RightColumn>
           <PaperGraphic src={crumpledPaperImage} alt="Crumpled paper illustration" />
         </RightColumn>
-        {/* REMOVED the StatsContainer JSX block */}
       </HeroContent>
     </HeroSection>
   );
 };
 
 export default Hero;
+
