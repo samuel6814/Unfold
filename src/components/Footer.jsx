@@ -12,6 +12,7 @@ const FooterContainer = styled.footer`
   flex-direction: column;
   gap: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.05); /* Subtle separator line */
+  box-sizing: border-box; /* Ensures padding does not add to the width */
 `;
 
 const LinksContainer = styled.div`
