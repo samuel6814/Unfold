@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Navbar from './Navbar';
 import crumpledPaperImage from '../assets/crumpled-paper.jpg'; // Make sure this path is correct
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../lib/Firebase';
+import { Info } from 'lucide-react';
 
 // Keyframes for the 'unfold' text animation
 const unfoldText = keyframes`
@@ -25,6 +28,29 @@ const slowRotate = keyframes`
   }
 `;
 
+// NEW: Keyframes for the notification slide-in/out
+const slideInBottom = keyframes`
+  from {
+    transform: translate(-50%, 100px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+`;
+
+const slideOutBottom = keyframes`
+  from {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, 100px);
+    opacity: 0;
+  }
+`;
+
 // HeroSection with gradient background
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -38,30 +64,31 @@ const HeroSection = styled.section`
   overflow: hidden;
 `;
 
-// MODIFIED: Added column direction and gap for mobile
 const HeroContent = styled.main`
   flex-grow: 1;
   display: flex;
-  flex-direction: column; /* Stack vertically on mobile */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem; /* Add space between text and image on mobile */
+  gap: 2rem;
   width: 100%;
   padding: 80px clamp(1.5rem, 5vw, 8rem);
   box-sizing: border-box;
 
-  /* On larger screens, switch to a two-column layout */
   @media (min-width: 992px) {
-    flex-direction: row; /* Side-by-side on desktop */
+    flex-direction: row;
     justify-content: space-between;
   }
 `;
 
-// MODIFIED: Text alignment and max-width adjustments for responsiveness
 const LeftColumn = styled.div`
   max-width: 550px;
   z-index: 2;
   text-align: center;
+
+  @media (max-width: 991px) {
+    margin-top: 5vh;
+  }
 
   @media (min-width: 992px) {
     text-align: left;
@@ -74,7 +101,6 @@ const SmallHeading = styled.p`
   margin-bottom: 1rem;
 `;
 
-// MODIFIED: Responsive font size
 const MainHeadline = styled.h1`
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 800;
@@ -105,7 +131,6 @@ const Description = styled.p`
   }
 `;
 
-// MODIFIED: Now visible on mobile
 const RightColumn = styled.div`
   display: flex;
   flex: 1;
@@ -115,10 +140,9 @@ const RightColumn = styled.div`
   width: 100%;
 `;
 
-// MODIFIED: Made the image responsive
 const PaperGraphic = styled.img`
   width: 100%;
-  max-width: 300px; /* Smaller max-width for mobile */
+  max-width: 300px;
   height: auto;
   z-index: 1;
   opacity: 1;
@@ -126,14 +150,42 @@ const PaperGraphic = styled.img`
   animation: ${slowRotate} 60s linear infinite;
 
   @media (min-width: 992px) {
-    max-width: 500px; /* Restore larger size for desktop */
+    max-width: 500px;
   }
 `;
 
+// NEW: Styled component for the notification
+const NotificationContainer = styled.div`
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: ${slideInBottom} 0.5s 1.5s ease-out forwards, ${slideOutBottom} 0.5s 4.5s ease-out forwards;
+`;
+
 const Hero = () => {
-  // MODIFIED: Split headline into two lines
   const headlineText = "YOU ARE NOT\nALONE";
   const headlineLines = headlineText.split('\n');
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // Assume logged in initially to prevent flash
+
+  useEffect(() => {
+    // Check auth state once when the component mounts
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+      unsubscribe(); // Stop listening after the first check
+    });
+    return () => unsubscribe();
+  }, []);
   
   return (
     <HeroSection>
@@ -142,7 +194,6 @@ const Hero = () => {
         <LeftColumn>
           <SmallHeading>Unfold: Rediscover yourself. Reclaim your story.</SmallHeading>
           <MainHeadline>
-            {/* MODIFIED: Re-introduced logic for multi-line animation */}
             {headlineLines.map((line, lineIndex) => {
               const previousLinesLength = headlineLines.slice(0, lineIndex).reduce((acc, l) => acc + l.length, 0);
               return (
@@ -170,6 +221,14 @@ const Hero = () => {
           <PaperGraphic src={crumpledPaperImage} alt="Crumpled paper illustration" />
         </RightColumn>
       </HeroContent>
+
+      {/* Conditionally render the notification if user is NOT logged in */}
+      {!isLoggedIn && (
+        <NotificationContainer>
+          <Info size={24} />
+          <span>Login to save your progress and access all features.</span>
+        </NotificationContainer>
+      )}
     </HeroSection>
   );
 };

@@ -5,6 +5,7 @@ import Gateway from "./components/CoreRecovery/Gateway";
 import Gateway2 from "./components/AiCounsellor/Gateway";
 import Gateway3 from "./components/Community/Gateway";
 import Gateway4 from "./components/RescourceSkills/Gateway";
+import Testimonials from "./components/Testimonials";
 
 
 const Container = styled.div`
@@ -43,6 +44,10 @@ const App = () => {
 
       <Section>
         <Gateway4 />
+      </Section>
+
+      <Section>
+        <Testimonials />
       </Section>
      
 

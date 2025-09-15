@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Wind, Library } from 'lucide-react';
+import { Wind, Library, Trophy } from 'lucide-react'; // Added Trophy icon
 import Navbar from '../Navbar';
 
 const PageContainer = styled.div`
@@ -91,6 +91,13 @@ const Gateway = () => {
               <Library size={48} color="#8B5CF6" />
               <h3>Resource Library</h3>
               <p>A curated collection of articles and guides to support your growth.</p>
+            </ToolCard>
+            
+            {/* NEW: Card for Personal Goal Setting */}
+            <ToolCard to="/personalgoals">
+              <Trophy size={48} color="#F59E0B" />
+              <h3>Personal Goals</h3>
+              <p>Define your motivation and set meaningful goals to guide your recovery.</p>
             </ToolCard>
           </ToolsGrid>
         </ContentWrapper>

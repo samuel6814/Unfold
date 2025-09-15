@@ -13,7 +13,9 @@ import HabitTracker from './components/CoreRecovery/HabitTracker'
 import AiCounsellor from './components/AiCounsellor/AiCounsellor'
 import CommunityHub from './components/Community/CommunityHub'
 import BreathingExercise from './components/RescourceSkills/BreathingExercise'
-import ResourceLibrary from './components/ResourcesSkills/ResoureLibrary'
+import ResourceLibrary from './components/RescourceSkills/ResoureLibrary'
+import PersonalGoalSetting from './components/RescourceSkills/PersonalGoalSetting'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -32,6 +34,8 @@ createRoot(document.getElementById('root')).render(
       <Route path="/communityhub" element={<CommunityHub/>} />
       <Route path="/breathingexercise" element={<BreathingExercise/>} />
       <Route path="/resourcelibrary" element={<ResourceLibrary/>} />
+      <Route path="/personalgoals" element={<PersonalGoalSetting/>} />
+      <Route path="/testimonials" element={<Testimonials/>} />
 
     </Routes>
     </BrowserRouter>
